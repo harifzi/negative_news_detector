@@ -4,6 +4,7 @@ There is also any features, are:
 - Input predict manual
 - Data Train management
 - Web Views
+- Indonesia Stopwords
 
 ### Note
 Database datatrain is available on dev directory [here](./dev). Make sure you installed all this [requirements](./requirements.txt).
