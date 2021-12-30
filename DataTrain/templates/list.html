@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Data Train</h1>
+</div>
+
+<div class="card shadow mb-4">
+
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Daftar Data Train</h6>
+
+        <a href="{% url 'new' %}" class="btn btn-primary btn-icon-split float-right">
+          <span class="icon text-white-50">
+            <i class="fas fa-plus"></i>
+          </span>
+          <span class="text">Tambah Data Train</span>
+        </a>
+    </div>
+    <div class="card-body">
+
+        <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Isi Data Train</th>
+              <th>Label</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+
+          {% for data_train in record %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ data_train.isi_data_train }}</td>
+              <td>{{ data_train.label }}</td>
+              <td><center>
+                <a href="edit/{{ data_train.id }}" class="btn btn-success btn-icon-split">
+                  <span class="icon text-white">
+                    <i class="fas fa-edit"></i>
+                  </span>
+                </a>
+                <a href="javascript:void(0)" class="btn btn-danger btn-icon-split" attrHref="delete/{{ data_train.id }}" id="deletePlease" data-toggle="modal" data-target="#deleteConfirm">
+                  <span class="icon text-white">
+                    <i class="fas fa-trash"></i>
+                  </span>
+                </a>
+              </center></td>
+            </tr>
+          {% endfor %}
+
+          </tbody>
+        </table>
+        </div>
+
+        <div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="DeleteConfirmLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Apakah Anda Yakin?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Apakah anda yakin menghapus data train ini?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" id="yesPlease"><button class="btn btn-danger">Iya, saya yakin</button></a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+
+  // Tombol Konfirmasi Hapus
+  $(document).on('click', '#deletePlease', function() {
+
+      $urlDirection = $(this).attr('attrHref');
+      $('#yesPlease').attr('href',$urlDirection);
+
+  });
+
+</script>
+
+{% endblock %}
