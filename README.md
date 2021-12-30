@@ -1,5 +1,5 @@
 ### Introduction
-Indonesia's negative news detection using gaussian naive bayes, with features:
+Indonesia's negative news detection using gaussian naive bayes build with Django and Scikit Learn. There is also any features, are:
 - Input predict manual
 - Data Train management
 - Web Views
